@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import {
   Cart,
+  CartModal,
   Container,
   CurrencyList,
   CurrencySwitcher,
@@ -18,6 +19,9 @@ import {
   showCurrencyList,
   updateCurrency,
 } from "../../features/currency/currencySlice";
+import { showCart } from "../../features/cart/cartSlice";
+import MiniCart from '../miniCart'
+
 
 class Index extends Component {
   selectCurrency = (currency) => {
@@ -30,7 +34,7 @@ class Index extends Component {
   }
 
   render() {
-    const { categories, currency } = this.props;
+    const { categories, currency, cart } = this.props;
     // console.log(currency);
 
     return (
@@ -47,7 +51,7 @@ class Index extends Component {
           ))}
         </MenuLeft>
         <Logo to="/">
-          <img src={logo} alt="" />
+          <img src={logo} alt="logo" />
         </Logo>
         <MenuRight>
           <CurrencySwitcher>
@@ -63,20 +67,25 @@ class Index extends Component {
               </small>
             </span>
             <CurrencyList open={currency?.currencyOpen}>
-              {currency?.currencies.map((item) => (
-                <div
-                  key={item?.symbol}
-                  onClick={() => this.selectCurrency(item?.label)}
-                >
-                  <span>
-                    {item.symbol} {item?.label}
-                  </span>
-                </div>
-              ))}
+              {currency &&
+                currency?.currencies?.map((item) => (
+                  <div
+                    key={item?.symbol}
+                    onClick={() => this.selectCurrency(item?.label)}
+                  >
+                    <span>
+                      {item.symbol} {item?.label}
+                    </span>
+                  </div>
+                ))}
             </CurrencyList>
           </CurrencySwitcher>
           <Cart>
-            <BsCart2 />
+            <div className="count">{cart?.qty}</div>
+            <BsCart2 onClick={() => this.props.showCart()} />
+            <CartModal open={cart?.openCart}>
+              <MiniCart/>
+            </CartModal>
           </Cart>
         </MenuRight>
       </Container>
@@ -87,9 +96,9 @@ class Index extends Component {
 const mapStateToProps = (state) => ({
   categories: state.categories,
   currency: state.currency,
-  // currencyOpen:
+  cart: state.cart
 });
 
-const mapDispatchToProps = { GetCategories, showCurrencyList, updateCurrency };
+const mapDispatchToProps = { GetCategories, showCurrencyList, updateCurrency, showCart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

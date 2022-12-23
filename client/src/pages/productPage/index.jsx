@@ -41,21 +41,17 @@ class Index extends Component {
     selectedColor: 0,
   };
 
-  // getPrice() {
-  //   this.setState({ prices: this.props?.product?.prices });
-
-  //   this.state.prices.map((item) => {
-  //     if (item.currency.symbol === this.props.currency?.symbol) {
-  //       return this.setState({ amount: item?.amount });
-  //     } else {
-  //       return null;
-  //     }
-  //   });
-  // }
-
   componentDidMount() {
     this.props.GetProduct(this.props.params.id);
-    // this.getPrice();
+    setTimeout(() => {
+        this.setState({
+      product: this.props.product,
+      gallery: this.props.product?.gallery,
+      attributes: this.props.product?.attributes,
+      loading: false,
+    });
+    }, 1000);
+   
   }
 
   componentDidUpdate(state, props) {
@@ -69,6 +65,7 @@ class Index extends Component {
   colorSelect(attributeNameIndex, index) {
     if (this.state.selectedColor === index) {
       this.setState({ [attributeNameIndex]: index });
+
       return true;
     } else {
       return false;
@@ -81,6 +78,8 @@ class Index extends Component {
     const attributeNames = this.state.attributes.map((obj) => {
       return obj.name;
     });
+
+    console.log(attributeNames)
     const selectedAttributes = [];
     for (let i = 0; i < attributeNames.length; i++) {
       for (let j = 0; j < keysState.length; j++) {
@@ -90,6 +89,8 @@ class Index extends Component {
         }
       }
     }
+
+
 
     // this.setState({ prices: this.props?.product?.prices });
     const unitPrice = this.props.product?.prices.filter(
@@ -103,6 +104,7 @@ class Index extends Component {
       selectedAttributes,
       unitPrice,
       total: unitPrice[0]?.amount,
+      selectedColor: this.state.selectedColor,
       qty: 1,
     };
     this.props.addProductToCart({ productData });
@@ -118,6 +120,7 @@ class Index extends Component {
     });
 
     // console.log(product);
+    // console.log(this.state.selectedColor);
     return (
       <Container>
         <ImageGallery images={product?.gallery} />
@@ -140,13 +143,14 @@ class Index extends Component {
                       return (
                         <Size
                           key={`${index}_attribute${item} `}
-                          className={
+                          selected={
                             this.state[attrNameIndex] === index
-                              ? "attribute-item-selected"
-                              : "size"
+                              ? true
+                              : false
                           }
                           onClick={() => {
                             this.setState({ [attrNameIndex]: index });
+                            
                           }}
                         >
                           <p key={`${index}_item value${item.value}`}>
@@ -169,9 +173,10 @@ class Index extends Component {
                     <FilterColor
                       key={`index color ${index}`}
                       color={item.value}
-                      selected={this.colorSelect(item.id)}
+                      selected={this.state.selectedColor === item.id}
                       onClick={() => {
                         this.setState({ selectedColor: item.id });
+                        
                       }}
                     />
                   );
@@ -180,14 +185,14 @@ class Index extends Component {
             </Colors>
           )}
 
-          {product?.color ? (
+          {/* {product?.color ? (
             <Colors>
               <h5 className="title">COLOR:</h5>
               <div className="color__list">
                 <Color color={"#4242"} />
               </div>
             </Colors>
-          ) : null}
+          ) : null} */}
 
           {price && (
             <Price>

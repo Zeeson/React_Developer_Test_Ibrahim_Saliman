@@ -9,9 +9,9 @@ export const Container = styled.div`
 `;
 
 export const Details = styled.div`
- display: flex;
- flex-direction: column;
- gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 `;
 
 export const Brand = styled.h3`
@@ -40,28 +40,29 @@ export const Sizes = styled.div`
     justify-content: center;
     align-items: center;
     transition: all 0.3s;
-    
-    
+
     &:hover {
       border: 2px solid rgba(66, 66, 66, 0.237);
     }
   }
 `;
 export const Size = styled.div`
+  width: 50px;
+  height: 30px;
+  background: #4242;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+  ${(p) =>
+    p.selected
+      ? `
+      border: 2px solid rgba(51, 51, 51, 0.415)`
+      : `none`};
 
-    width: 50px;
-    height: 30px;
-    background: #4242;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s;
-    
-    
-    &:hover {
-      border: 2px solid rgba(66, 66, 66, 0.237);
-    }
-  
+  &:hover {
+    border: 2px solid rgba(66, 66, 66, 0.237);
+  }
 `;
 export const Colors = styled.div`
   .title {
@@ -101,7 +102,7 @@ export const Price = styled.div`
 export const AddToCart = styled.button`
   display: inline;
   width: 150px;
-  background-color: #5ECE7B;
+  background-color: #5ece7b;
   color: #fff;
   outline: none;
   border: none;
@@ -113,12 +114,6 @@ export const AddToCart = styled.button`
   }
 `;
 export const Desc = styled.div``;
-
-
-
-
-
-
 
 export const TextOutOfStock = styled.div`
   text-transform: uppercase;
@@ -139,10 +134,11 @@ export const FilterColor = styled.div`
   cursor: pointer;
   ${(props) =>
     props.color === "#FFFFFF"
-      ? `background-color: ${props.color}; outline-offset: -1px; outline: 1px solid black`
+      ? `background-color: ${props.color};`
       : `background-color: ${props.color}`};
   ${(props) =>
     props.selected
-      ? `outline-offset: 1px; outline: 1px solid #5ECE7B`
+      ? `
+      border: 2px solid rgba(51, 51, 51, 0.447)`
       : `none`};
 `;

@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   padding: 0 8%;
   height: 10vh;
+  z-index: 999;
 `;
 export const Logo = styled(Link)`
   width: 20px;
@@ -95,15 +96,18 @@ export const CurrencyList = styled.div`
   position: absolute;
   right: -50px;
   top: 150%;
+  height: auto;
   width: 100px;
-  text-align: center;
+  /* text-align: center; */
   box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.09);
   display: ${(p) => (p.open ? "grid" : "none")};
   border-radius: 8px;
-  overflow: hidden;
+  grid-gap: 5px;
+  /* overflow: hidden; */
 
   span {
-    padding: 15px;
+    padding: 7px 15px;
+    /* margin: ; */
     transition: all 0.3s;
     font-size: 15px;
     &:hover {
@@ -111,4 +115,37 @@ export const CurrencyList = styled.div`
     }
   }
 `;
-export const Cart = styled.div``;
+export const Cart = styled.div`
+position: relative;
+font-size: 23px;
+
+.count {
+  position: absolute;
+  font-size: 10px;
+  color: #fff;
+  top: -5px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #333;
+  border-radius: 50px;
+}
+`;
+export const CartModal = styled.div`
+
+  position: absolute;
+  font-size: 10px;
+  // color: #fff;
+  top: 50px;
+  right: -10%;
+  width: 400px;
+  height: auto;
+  display: ${p => p.open ? 'flex' : 'none'};
+  z-index: 999;
+  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.5);
+  
+
+`;
