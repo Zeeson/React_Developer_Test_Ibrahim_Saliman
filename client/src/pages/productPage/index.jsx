@@ -33,7 +33,7 @@ class Index extends Component {
     product: [],
     loading: false,
     error: null,
-    // currency: this.props.currency?.currency,
+    currency: this.props.currency?.currency,
     prices: [],
     amount: null,
     attributes: [],
@@ -90,6 +90,8 @@ class Index extends Component {
       }
     }
 
+console.log(product)
+// console.log(cart)
 
 
     // this.setState({ prices: this.props?.product?.prices });

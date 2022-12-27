@@ -24,6 +24,9 @@ import MiniCart from '../miniCart'
 
 
 class Index extends Component {
+   state = {
+    sign: ""
+  }
   selectCurrency = (currency) => {
     this.props.updateCurrency(currency);
     this.props.showCurrencyList();
@@ -51,12 +54,12 @@ class Index extends Component {
           ))}
         </MenuLeft>
         <Logo to="/">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="" />
         </Logo>
         <MenuRight>
           <CurrencySwitcher>
             <span onClick={() => this.props.showCurrencyList()}>
-              ${" "}
+              {this.state.sign? this.state.sign : "$"}{" "}
               <small>
                 {" "}
                 {currency?.currencyOpen ? (
@@ -71,7 +74,13 @@ class Index extends Component {
                 currency?.currencies?.map((item) => (
                   <div
                     key={item?.symbol}
-                    onClick={() => this.selectCurrency(item?.label)}
+                    // onClick={() => this.selectCurrency(item?.label)}
+                      onClick={() => {
+                        this.selectCurrency(item?.label)
+                        this.setState({
+                          sign: item?.symbol
+                        })
+                      }}
                   >
                     <span>
                       {item.symbol} {item?.label}

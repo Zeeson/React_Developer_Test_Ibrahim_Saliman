@@ -23,18 +23,18 @@ class Index extends Component {
         </List>
         <div className="order-description">
           <div className="order-column-1">
-            <p className="order-text">Tax 21%:</p>
-            <p className="order-text">Quantity:</p>
-            <p className="order-text">Total:</p>
+            <p className="order-text">Tax 21%: </p>
+            <p className="order-text">Quantity: </p>
+            <p className="order-text">Total: </p>
           </div>
           <div className="order-column-2">
             <p className="order-quantity">
-              {this.props.currency.currency}
+              {this.props.currency.currency} {" "}
               {Math.round(cart?.total * 0.21)}
             </p>
             <p className="order-quantity">{cart?.qty}</p>
             <p className="order-quantity">
-              {this.props.currency.currency}
+              {this.props.currency.currency} {" "}
               {cart?.total.toFixed(2)}
             </p>
           </div>
