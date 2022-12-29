@@ -111,6 +111,7 @@ console.log(product)
     };
     this.props.addProductToCart({ productData });
   }
+  
   render() {
     // console.log(this.state.amount);
     const { product, currency } = this.props;

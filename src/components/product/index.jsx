@@ -20,7 +20,7 @@ class Index extends Component {
         </Image>
         <Details>
           <div className="cart__btn">
-            <BsCart2 />
+            <BsCart2 onClick={() => this.addToCart(product)} />
           </div>
           <Title to={`/product/${product?.id}`}> {product?.name}</Title>
           <Price>

@@ -33,8 +33,8 @@ class Index extends Component {
             {cart?.total.toFixed(2)}
           </div>
         </div>
-        <div onClick={() => this.props.showCart()} className="minicart-buttons" >
-          <Link to="/cart" className="link-view-bag" >
+        <div className="minicart-buttons" >
+          <Link to="/cart" className="link-view-bag" onClick={() => this.props.showCart()} >
             <p >view bag</p>
           </Link>
           <button className="btn-checkout">check out</button>

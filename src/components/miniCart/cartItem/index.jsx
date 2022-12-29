@@ -17,13 +17,10 @@ import {
 } from "../../../features/cart/cartSlice";
 
 class Index extends Component {
-
-  
- 
   render() {
     const { product } = this.props;
     const swatch = product?.attributes?.filter((i) => i.type === "swatch");
-    // console.log(product?.selectedAttributes[0][1]);
+
     return (
       <Container>
         <Details>
@@ -49,8 +46,10 @@ class Index extends Component {
                           <Size
                             key={`${index}_attribute${item} `}
                             selected={
-                              index ===
-                              this.props.product?.selectedAttributes[0][1]
+                              this.props.product?.selectedAttribute
+                                ? index ===
+                                  this.props.product?.selectedAttributes[0][1]
+                                : false
                             }
                             onClick={() => {
                               this.setState({ [attrNameIndex]: index });
@@ -92,7 +91,6 @@ class Index extends Component {
               this.props.dispatch(decreaseProductQuantity(product?.id))
             }
           >
-           
             -
           </button>
           <span>{product?.qty}</span>
@@ -109,6 +107,5 @@ class Index extends Component {
     );
   }
 }
-
 
 export default connect()(Index);

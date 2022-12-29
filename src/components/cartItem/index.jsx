@@ -56,16 +56,16 @@ class Index extends Component {
                           <Size
                             key={`${index}_attribute${item} `}
                             selected={
-                              index ===
-                              this.props.product?.selectedAttributes[0][1]
+                              this.props.product?.selectedAttribute
+                                ? index ===
+                                  this.props.product?.selectedAttributes[0][1]
+                                : false
                             }
-                            onClick={
-                              () =>
-                                this.updateAttr({
-                                  id: product?.id,
-                                  attr: { [attrNameIndex]: index },
-                                })
-                              
+                            onClick={() =>
+                              this.updateAttr({
+                                id: product?.id,
+                                attr: { [attrNameIndex]: index },
+                              })
                             }
                           >
                             <p key={`${index}_item value${item.value}`}>
